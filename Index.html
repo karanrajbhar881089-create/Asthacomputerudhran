@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astha Computer Training Center - Udharn, Ballia</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0e17;
+            --panel-dark: #131c2e;
+            --accent-neon: #00f2fe;
+            --accent-purple: #9b51e0;
+            --text-light: #ffffff;
+            --text-gray: #a0aec0;
+            --success: #2ecc71;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+        /* Premium Header */
+        header {
+            background: rgba(19, 28, 46, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 242, 254, 0.2);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--accent-neon), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            border: 1px solid var(--accent-neon);
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+        .nav-links a:hover {
+            background: var(--accent-neon);
+            color: var(--bg-dark);
+        }
+        .location-tag {
+            font-size: 14px;
+            color: var(--text-gray);
+        }
+        /* Hero Banner Container */
+        .hero-banner {
+            position: relative;
+            height: 450px;
+            margin-top: 70px;
+            background: linear-gradient(135deg, #1e1b4b, #0f172a);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .facility-scroller {
+            position: absolute;
+            bottom: 20px;
+            display: flex;
+            gap: 50px;
+            width: 200%;
+            animation: scrollBackground 25s linear infinite;
+        }
+        .facility-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .facility-item i {
+            font-size: 24px;
+            color: var(--accent-neon);
+        }
+        .facility-item span {
+            font-weight: bold;
+            font-size: 14px;
+        }
+        @keyframes scrollBackground {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .hero-text h1 {
+            font-size: 45px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(0, 242, 254, 0.6);
+        }
+        .hero-text p {
+            color: var(--accent-neon);
+            font-size: 18px;
+            letter-spacing: 2px;
+        }
+        /* Layout Structure Containers */
+        .container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 36px;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--accent-neon);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+        /* 3D Grid Elements */
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            perspective: 1000px;
+        }
+        .card-3d-wrapper {
+            position: relative;
+            height: 380px;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+        .card-3d-wrapper:hover {
+            transform: rotateY(180deg);
+        }
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: var(--panel-dark);
+            border-radius: 15px;
+            padding: 25px;
+            backface-visibility: hidden;
+            border: 1px solid rgba(0, 242, 254, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .card-front {
+            z-index: 2;
+        }
+        .card-back {
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, var(--panel-dark), #1c2e4a);
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid var(--accent-neon);
+        }
+        .course-icon {
+            font-size: 40px;
+            color: var(--accent-neon);
+            margin-bottom: 12px;
+        }
+        .course-title {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        .course-desc {
+            color: var(--text-gray);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .duration-badge {
+            align-self: flex-start;
+            background: rgba(155, 81, 224, 0.2);
+            color: var(--accent-purple);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-top: 10px;
+            border: 1px solid var(--accent-purple);
+        }
+        .fee-heading {
+            font-size: 14px;
+            color: var(--text-gray);
+            text-transform: uppercase;
+        }
+        .fee-amount {
+            font-size: 30px;
+            color: var(--accent-neon);
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .enroll-btn {
+            background: linear-gradient(45deg, var(--accent-neon), var(--accent-purple));
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+        .enroll-btn:hover {
+            transform: scale(1.05);
+        }
+        /* Registration Form Section */
+        .registration-section {
+            background-color: var(--panel-dark);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(0, 242, 254, 0.2);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+        .form-group label {
+            font-size: 14px;
+            color: var(--text-gray);
+            font-weight: 600;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            background: var(--bg-dark);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .form-group input[type="file"] {
+            padding: 8px;
+            cursor: pointer;
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--accent-neon);
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, var(--accent-neon), var(--accent-purple));
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 30px;
+            box-shadow: 0 5px 20px rgba(0, 242, 254, 0.3);
+            transition: 0.3s;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 242, 254, 0.5);
+        }
+
+        /* --- SUCCESS MESSAGE & CRAZY CARTOON DANCE EFFECT --- */
+        .success-container {
+            display: none; /* hidden initially */
+            background: #111927;
+            border: 2px dashed var(--accent-neon);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            max-width: 600px;
+            margin: 40px auto;
+            box-shadow: 0 0 30px rgba(0, 242, 254, 0.4);
+        }
+        .success-container h2 {
+            color: var(--success);
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .success-container p {
+            color: var(--text-gray);
+            margin-bottom: 30px;
+        }
+
+        /* 3D-Like Animated Cartoon Character Box */
+        .cartoon-wrapper {
+            position: relative;
+            width: 200px;
+            height: 250px;
+            margin: 0 auto;
+            perspective: 600px;
+        }
+
+        /* CSS Character Structure */
+        .cartoon-character {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: crazyDance 1.5s ease-in-out infinite alternate;
+            transform-origin: bottom center;
+        }
+
+        /* Character Body Parts */
+        .cartoon-head {
+            position: absolute;
+            top: 20px;
+            left: 50px;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #ff007f, #ffaa00);
+            border-radius: 50% 50% 40% 40%;
+            box-shadow: 0 0 20px rgba(255, 0, 127, 0.6);
+            animation: headActing 0.8s ease-in-out infinite alternate;
+        }
+        .cartoon-eye-left, .cartoon-eye-right {
+            position: absolute;
+            top: 30px;
+            width: 25px;
+            height: 25px;
+            background: #fff;
+            border-radius: 50%;
+        }
+        .cartoon-eye-left { left: 20px; }
+        .cartoon-eye-right { right: 20px; }
+        
+        .cartoon-pupil {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 12px;
+            height: 12px;
+            background: #000;
+            border-radius: 50%;
+            animation: googlyEyes 0.5s infinite linear;
+        }
+        .cartoon-mouth {
+            position: absolute;
+            bottom: 15px;
+            left: 30px;
+            width: 40px;
+            height: 20px;
+            background: #4a0000;
+            border-radius: 0 0 40px 40px;
+            animation: mouthActing 0.4s infinite alternate;
+        }
+        .cartoon-body {
+            position: absolute;
+            top: 115px;
+            left: 65px;
+            width: 70px;
+            height: 80px;
+            background: linear-gradient(to right, #00f2fe, #4facfe);
+            border-radius: 20px 20px 10px 10px;
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+        }
+        .cartoon-arm-l, .cartoon-arm-r {
+            position: absolute;
+            top: 120px;
+            width: 20px;
+            height: 60px;
+            background: #ff007f;
+            border-radius: 10px;
+            transform-origin: top center;
+        }
+        .cartoon-arm-l {
+            left: 40px;
+            animation: waveLeft 0.5s infinite alternate;
+        }
+        .cartoon-arm-r {
+            right: 40px;
+            animation: waveRight 0.5s infinite alternate-reverse;
+        }
+        .cartoon-leg-l, .cartoon-leg-r {
+            position: absolute;
+            bottom: 10px;
+            width: 22px;
+            height: 50px;
+            background: #ffaa00;
+            border-radius: 10px;
+            transform-origin: top center;
+        }
+        .cartoon-leg-l {
+            left: 70px;
+            animation: kickLeft 0.6s infinite alternate;
+        }
+        .cartoon-leg-r {
+            right: 70px;
+            animation: kickRight 0.6s infinite alternate-reverse;
+        }
+
+        /* --- ANIMATIONS (CRAZY DANCE & ACTING) --- */
+        @keyframes crazyDance {
+            0% { transform: translateY(0) rotate(5deg) scaleY(1); }
+            50% { transform: translateY(-20px) rotate(-5deg) scaleY(1.1); }
+            100% { transform: translateY(0) rotate(8deg) scaleY(0.95); }
+        }
+        @keyframes headActing {
+            0% { transform: scale(1) rotate(0deg); }
+            100% { transform: scale(1.1) rotate(15deg); }
+        }
+        @keyframes googlyEyes {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(4px, 2px); }
+            50% { transform: translate(-2px, 4px); }
+            75% { transform: translate(3px, -3px); }
+        }
+        @keyframes mouthActing {
+            0% { height: 5px; border-radius: 0; }
+            100% { height: 22px; border-radius: 0 0 40px 40px; }
+        }
+        @keyframes waveLeft {
+            0% { transform: rotate(20deg); }
+            100% { transform: rotate(150deg); }
+        }
+        @keyframes waveRight {
+            0% { transform: rotate(-20deg); }
+            100% { transform: rotate(-150deg); }
+        }
+        @keyframes kickLeft {
+            0% { transform: rotate(10deg) translateY(0); }
+            100% { transform: rotate(-30deg) translateY(-5px); }
+        }
+        @keyframes kickRight {
+            0% { transform: rotate(-10deg) translateY(0); }
+            100% { transform: rotate(30deg) translateY(-5px); }
+        }
+
+        /* Footer */
+        footer {
+            background: #070a10;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-gray);
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Premium Header -->
+    <header>
+        <div class="logo">ASTHA COMPUTER</div>
+        <div class="nav-links">
+            <a href="#courses">View Courses</a>
+            <a href="#register">Register Online</a>
+        </div>
+        <div class="location-tag"><i class="fa-solid fa-location-dot"></i> Udharn, Ballia, UP</div>
+    </header>
+
+    <!-- Hero Banner Carousel Strip -->
+    <section class="hero-banner">
+        <div class="hero-text">
+            <h1>Shape Your Digital Future</h1>
+            <p>PREMIUM IT SKILL DEVELOPMENT CENTRE</p>
+        </div>
+        <div class="facility-scroller">
+            <div class="facility-item"><i class="fa-solid fa-desktop"></i><span>1:1 Live Lab Allocation</span></div>
+            <div class="facility-item"><i class="fa-solid fa-wifi"></i><span>Free High-Speed Wi-Fi Zone</span></div>
+            <div class="facility-item"><i class="fa-solid fa-id-card"></i><span>ISO 9001:2015 Verified Certifications</span></div>
+            <div class="facility-item"><i class="fa-solid fa-bolt"></i><span>24x7 Power Backup Facility</span></div>
+            <div class="facility-item"><i class="fa-solid fa-chalkboard-user"></i><span>Expert Interactive Faculty</span></div>
+        </div>
+    </section>
+
+    <!-- Course Grid Section -->
+    <div class="container" id="courses">
+        <h2 class="section-title">Standardized IT Programs (Ballia Region Framework)</h2>
+        <div class="course-grid">
+            
+            <!-- 1. ADCA -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div>
+                        <i class="fa-solid fa-graduation-cap course-icon"></i>
+                        <h3 class="course-title">ADCA</h3>
+                        <p class="course-desc">Advanced Diploma in Computer Applications. Complete package covering Office Tools, Financial Accounting, System Operations, and Basic Web Design workflows.</p>
+                    </div>
+                    <div class="duration-badge">12 Months</div>
+                </div>
+                <div class="card-back">
+                    <span class="fee-heading">Course Investment</span>
+                    <div class="fee-amount">₹7,500</div>
+                    <a href="#register" class="enroll-btn">Apply Now</a>
+                </div>
+            </div>
+
+            <!-- 2. DCA -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div>
+                        <i class="fa-solid fa-file-invoice course-icon"></i>
+                        <h3 class="course-title">DCA</h3>
+                        <p class="course-desc">Diploma in Computer Applications. Tailored core framework targeting database entries, operating environments, text layout automation, and spreadsheets.</p>
+                    </div>
+                    <div class="duration-badge">6 Months</div>
+                </div>
+                <div class="card-back">
+                    <span class="fee-heading">Course Investment</span>
+                    <div class="fee-amount">₹4,500</div>
+                    <a href="#register" class="enroll-btn">Apply Now</a>
+                </div>
+            </div>
+
+            <!-- 3. O Level -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div>
+                        <i class="fa-solid fa-award course-icon"></i>
+                        <h3 class="course-title">O Level (NIELIT)</h3>
+                        <p class="course-desc">Highly accredited foundational government employment roadmap module covering specialized Python engines, IoT architectures, and web UI architectures.</p>
+                    </div>
+                    <div class="duration-badge">12 Months</div>
+                </div>
+                <div class="card-back">
+                    <span class="fee-heading">Course Investment</span>
+                    <div class="fee-amount">₹15,000</div>
+                    <a href="#register" class="enroll-btn">Apply Now</a>
+                </div>
+            </div>
+
+            <!-- 4. CCC -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div>
+                        <i class="fa-solid fa-certificate course-icon"></i>
+                        <h3 class="course-title">CCC (NIELIT)</h3>
+                        <p class="course-desc">Course on Computer Concepts. Essential statutory certification required by government bodies validating computer utility literacy benchmarks.</p>
+                    </div>
+                    <div class="duration-badge">3 Months</div>
+                </div>
+                <div class="card-back">
+                    <span class="fee-heading">Course Investment</span>
+                    <div class="fee-amount">₹2,500</div>
+                    <a href="#register" class="enroll-btn">Apply Now</a>
+                </div>
+            </div>
+
+            <!-- 5. Tally Prime & GST -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div>
+                        <i class="fa-solid fa-calculator course-icon"></i>
+                        <h3 class="course-title">Tally Prime & GST</h3>
+                        <p class="course-desc">Professional bookkeeping architectures covering active tax layers, business payroll systems, stock records, and financial statement audits.</p>
+                    </div>
+                    <div class="duration-badge">3 Months</div>
+                </div>
+                <div class="card-back">
+                    <span class="fee-heading">Course Investment</span>
+                    <div class="fee-amount">₹4,000</div>
+                    <a href="#register" class="enroll-btn">Apply Now</a>
+                </div>
+            </div>
+
+            <!-- 6. Web Designing -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div>
+                        <i class="fa-solid fa-code course-icon"></i>
+                        <h3 class="course-title">Web Designing</h3>
+                        <p class="course-desc">Frontend deployment models leveraging pure structural responsive assets: HTML5 layout pipelines, CSS3 styling sheets, and integrated JavaScript engines.</p>
+                    </div>
+                    <div class="duration-badge">6 Months</div>
+                </div>
+                <div class="card-back">
+                    <span class="fee-heading">Course Investment</span>
+                    <div class="fee-amount">₹6,500</div>
+                    <a href="#register" class="enroll-btn">Apply Now</a>
+                </div>
+            </div>
+
+            <!-- 7. Python Programming -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div>
+                        <i class="fa-brands fa-python course-icon"></i>
+                        <h3 class="course-title">Python Programming</h3>
+                        <p class="course-desc">Deep-dive into core logical syntaxes, object-oriented concepts, algorithm structures, functional script setups, and relational data operations.</p>
+                    </div>
+                    <div class="duration-badge">3 Months</div>
+                </div>
+                <div class="card-back">
+                    <span class="fee-heading">Course Investment</span>
+                    <div class="fee-amount">₹5,000</div>
+                    <a href="#register" class="enroll-btn">Apply Now</a>
+                </div>
+            </div>
+
+            <!-- 8. PGDCA -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div>
+                        <i class="fa-solid fa-user-graduate course-icon"></i>
+                        <h3 class="course-title">PGDCA</h3>
+                        <p class="course-desc">Post Graduate Diploma in Computer Applications. Deep technical structure curated directly for graduate students targeting advanced system processes.</p>
+                    </div>
+                    <div class="duration-badge">12 Months</div>
+                </div>
+                <div class="card-back">
+                    <span class="fee-heading">Course Investment</span>
+                    <div class="fee-amount">₹14,000</div>
+                    <a href="#register" class="enroll-btn">Apply Now</a>
+                </div>
+            </div>
+
+            <!-- 9. Hardware & Networking -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div><i class="fa-solid fa-screwdriver-wrench course-icon"></i><h3 class="course-title">Hardware & Net</h3><p class="course-desc">PC Assembly, local router config, OS installation, and system troubleshooting.</p></div>
+                    <div class="duration-badge">6 Months</div>
+                </div>
+                <div class="card-back"><span class="fee-heading">Investment</span><div class="fee-amount">₹5,500</div><a href="#register" class="enroll-btn">Apply Now</a></div>
+            </div>
+
+            <!-- 10. AI & Graphic Design -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div><i class="fa-solid fa-palette course-icon"></i><h3 class="course-title">AI & Graphic Design</h3><p class="course-desc">Vector design modules integrated with modern prompt engineering systems.</p></div>
+                    <div class="duration-badge">4 Months</div>
+                </div>
+                <div class="card-back"><span class="fee-heading">Investment</span><div class="fee-amount">₹6,000</div><a href="#register" class="enroll-btn">Apply Now</a></div>
+            </div>
+
+            <!-- 11. Full Stack Web Dev -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div><i class="fa-solid fa-layer-group course-icon"></i><h3 class="course-title">Full Stack Web</h3><p class="course-desc">Master frontend tech, database integration, and functional API creation workflows.</p></div>
+                    <div class="duration-badge">12 Months</div>
+                </div>
+                <div class="card-back"><span class="fee-heading">Investment</span><div class="fee-amount">₹18,500</div><a href="#register" class="enroll-btn">Apply Now</a></div>
+            </div>
+
+            <!-- 12. Cyber Security -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div><i class="fa-solid fa-shield-halved course-icon"></i><h3 class="course-title">Cyber Security</h3><p class="course-desc">System defense mechanisms, white-hat principles, and network threat handling.</p></div>
+                    <div class="duration-badge">6 Months</div>
+                </div>
+                <div class="card-back"><span class="fee-heading">Investment</span><div class="fee-amount">₹11,500</div><a href="#register" class="enroll-btn">Apply Now</a></div>
+            </div>
+
+            <!-- 13. Data Analytics -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div><i class="fa-solid fa-chart-pie course-icon"></i><h3 class="course-title">Data Analytics</h3><p class="course-desc">Data evaluation protocols, visual reporting setups, and advanced query sheets.</p></div>
+                    <div class="duration-badge">4 Months</div>
+                </div>
+                <div class="card-back"><span class="fee-heading">Investment</span><div class="fee-amount">₹7,000</div><a href="#register" class="enroll-btn">Apply Now</a></div>
+            </div>
+
+            <!-- 14. Mobile App Dev -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div><i class="fa-solid fa-mobile-screen-button course-icon"></i><h3 class="course-title">Mobile App Dev</h3><p class="course-desc">Cross-platform application architectures and store marketplace delivery pipelines.</p></div>
+                    <div class="duration-badge">6 Months</div>
+                </div>
+                <div class="card-back"><span class="fee-heading">Investment</span><div class="fee-amount">₹12,000</div><a href="#register" class="enroll-btn">Apply Now</a></div>
+            </div>
+
+            <!-- 15. ADIT Diploma -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div><i class="fa-solid fa-laptop-code course-icon"></i><h3 class="course-title">ADIT Diploma</h3><p class="course-desc">Advanced IT structural rules targeting full systems management paradigms.</p></div>
+                    <div class="duration-badge">12 Months</div>
+                </div>
+                <div class="card-back"><span class="fee-heading">Investment</span><div class="fee-amount">₹9,500</div><a href="#register" class="enroll-btn">Apply Now</a></div>
+            </div>
+
+            <!-- 16. Java Core Engine -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div><i class="fa-brands fa-java course-icon"></i><h3 class="course-title">Java Core Engine</h3><p class="course-desc">Object OOP concepts, backend applications, and runtime configuration modules.</p></div>
+                    <div class="duration-badge">3 Months</div>
+                </div>
+                <div class="card-back"><span class="fee-heading">Investment</span><div class="fee-amount">₹5,000</div><a href="#register" class="enroll-btn">Apply Now</a></div>
+            </div>
+
+            <!-- 17. C & C++ Fundamentals -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div><i class="fa-solid fa-terminal course-icon"></i><h3 class="course-title">C & C++ Basics</h3><p class="course-desc">Procedural programming logics, basic variables structures, and system loops.</p></div>
+                    <div class="duration-badge">3 Months</div>
+                </div>
+                <div class="card-back"><span class="fee-heading">Investment</span><div class="fee-amount">₹4,000</div><a href="#register" class="enroll-btn">Apply Now</a></div>
+            </div>
+
+            <!-- 18. DTP Core -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div><i class="fa-solid fa-print course-icon"></i><h3 class="course-title">DTP Core</h3><p class="course-desc">Print media generation covering layout setups and commercial publishing templates.</p></div>
+                    <div class="duration-badge">3 Months</div>
+                </div>
+                <div class="card-back"><span class="fee-heading">Investment</span><div class="fee-amount">₹3,500</div><a href="#register" class="enroll-btn">Apply Now</a></div>
+            </div>
+
+            <!-- 19. Video Editing -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div><i class="fa-solid fa-video course-icon"></i><h3 class="course-title">Video Editing</h3><p class="course-desc">Multi-track editing workflows, visual enhancements, and audio blending systems.</p></div>
+                    <div class="duration-badge">4 Months</div>
+                </div>
+                <div class="card-back"><span class="fee-heading">Investment</span><div class="fee-amount">₹6,500</div><a href="#register" class="enroll-btn">Apply Now</a></div>
+            </div>
+
+            <!-- 20. E-Commerce Setup -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div><i class="fa-solid fa-globe course-icon"></i><h3 class="course-title">E-Commerce Setup</h3><p class="course-desc">Store deployments, payment gateway setups, and dynamic management interfaces.</p></div>
+                    <div class="duration-badge">3 Months</div>
+                </div>
+                <div class="card-back"><span class="fee-heading">Investment</span><div class="fee-amount">₹4,500</div><a href="#register" class="enroll-btn">Apply Now</a></div>
+            </div>
+
+            <!-- 21. Cloud Infrastructure -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div><i class="fa-solid fa-cloud course-icon"></i><h3 class="course-title">Cloud Admin</h3><p class="course-desc">Virtual space deployments, remote groups control, and network storage blocks.</p></div>
+                    <div class="duration-badge">6 Months</div>
+                </div>
+                <div class="card-back"><span class="fee-heading">Investment</span><div class="fee-amount">₹14,500</div><a href="#register" class="enroll-btn">Apply Now</a></div>
+            </div>
+
+            <!-- 22. Linux Administration -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div><i class="fa-brands fa-linux course-icon"></i><h3 class="course-title">Linux Admin</h3><p class="course-desc">Command line manipulation protocols, access rights controls, and shell script tasks.</p></div>
+                    <div class="duration-badge">3 Months</div>
+                </div>
+                <div class="card-back"><span class="fee-heading">Investment</span><div class="fee-amount">₹5,500</div><a href="#register" class="enroll-btn">Apply Now</a></div>
+            </div>
+
+            <!-- 23. DevOps Core -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div><i class="fa-solid fa-infinity course-icon"></i><h3 class="course-title">DevOps Core</h3><p class="course-desc">Continuous build frameworks, server image deliveries, and automation setups.</p></div>
+                    <div class="duration-badge">6 Months</div>
+                </div>
+                <div class="card-back"><span class="fee-heading">Investment</span><div class="fee-amount">₹16,000</div><a href="#register" class="enroll-btn">Apply Now</a></div>
+            </div>
+
+            <!-- 24. Database Management -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div><i class="fa-solid fa-database course-icon"></i><h3 class="course-title">Database Management</h3><p class="course-desc">SQL structure architectures, table operations, and record indexing systems.</p></div>
+                    <div class="duration-badge">4 Months</div>
+                </div>
+                <div class="card-back"><span class="fee-heading">Investment</span><div class="fee-amount">₹6,000</div><a href="#register" class="enroll-btn">Apply Now</a></div>
+            </div>
+
+            <!-- 25. AI Foundations -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div><i class="fa-solid fa-brain course-icon"></i><h3 class="course-title">AI Foundations</h3><p class="course-desc">Mathematical regression algorithms setup and basic model training practices.</p></div>
+                    <div class="duration-badge">6 Months</div>
+                </div>
+                <div class="card-back"><span class="fee-heading">Investment</span><div class="fee-amount">₹18,000</div><a href="#register" class="enroll-btn">Apply Now</a></div>
+            </div>
+
+            <!-- 26. Digital Marketing -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div><i class="fa-solid fa-rectangle-ad course-icon"></i><h3 class="course-title">Digital Marketing</h3><p class="course-desc">Search listing optimization rules, social outreach setups, and ad trackers.</p></div>
+                    <div class="duration-badge">3 Months</div>
+                </div>
+                <div class="card-back"><span class="fee-heading">Investment</span><div class="fee-amount">₹5,000</div><a href="#register" class="enroll-btn">Apply Now</a></div>
+            </div>
+
+            <!-- 27. Advanced Accounting -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div><i class="fa-solid fa-money-check-dollar course-icon"></i><h3 class="course-title">Adv Accounting</h3><p class="course-desc">Enterprise ledger generation, audit parameters, and fiscal statements export.</p></div>
+                    <div class="duration-badge">4 Months</div>
+                </div>
+                <div class="card-back"><span class="fee-heading">Investment</span><div class="fee-amount">₹5,500</div><a href="#register" class="enroll-btn">Apply Now</a></div>
+            </div>
+
+            <!-- 28. BCC Basic -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div><i class="fa-solid fa-user-gear course-icon"></i><h3 class="course-title">BCC Basic</h3><p class="course-desc">System operational basics, clean mail operations, and internet protocols.</p></div>
+                    <div class="duration-badge">2 Months</div>
+                </div>
+                <div class="card-back"><span class="fee-heading">Investment</span><div class="fee-amount">₹1,500</div><a href="#register" class="enroll-btn">Apply Now</a></div>
+            </div>
+
+            <!-- 29. Speed Typing Master -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div><i class="fa-solid fa-keyboard course-icon"></i><h3 class="course-title">Typing Master</h3><p class="course-desc">Dual language layout training, accuracy enhancement drills, and tests.</p></div>
+                    <div class="duration-badge">2 Months</div>
+                </div>
+                <div class="card-back"><span class="fee-heading">Investment</span><div class="fee-amount">₹1,200</div><a href="#register" class="enroll-btn">Apply Now</a></div>
+            </div>
+
+            <!-- 30. UI/UX Layouts -->
+            <div class="card-3d-wrapper">
+                <div class="card-front">
+                    <div><i class="fa-solid fa-bezier-curve course-icon"></i><h3 class="course-title">UI/UX Layouts</h3><p class="course-desc">User interaction frameworks creation, wireframing steps, and style specs.</p></div>
+                    <div class="duration-badge">4 Months</div>
+                </div>
+                <div class="card-back"><span class="fee-heading">Investment</span><div class="fee-amount">₹7,500</div><a href="#register" class="enroll-btn">Apply Now</a></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Registration Form Section -->
+    <div class="container" id="register">
+        <h2 class="section-title">Online Admission Desk</h2>
+        
+        <!-- Form UI Box -->
+        <div class="registration-section" id="form-container">
+            <form id="admissionForm" onsubmit="handleRegistration(event)" enctype="multipart/form-data">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="student-name">Full Name</label>
+                        <input type="text" id="student-name" name="name" placeholder="Enter full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="parent-name">Father's / Guardian's Name</label>
+                        <input type="text" id="parent-name" name="parent" placeholder="Enter guardian name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Mobile Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter 10-digit mobile number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter email address">
+                    </div>
+                    <div class="form-group">
+                        <label for="course-select">Select Program & Fee</label>
+                        <select id="course-select" name="course" required>
+                            <option value="" disabled selected>-- Choose a Course --</option>
+                            <option value="adca">ADCA (12 Months) - ₹7,500</option>
+                            <option value="dca">DCA (6 Months) - ₹4,500</option>
+                            <option value="olevel">O Level (NIELIT) (12 Months) - ₹15,000</option>
+                            <option value="ccc">CCC (NIELIT) (3 Months) - ₹2,500</option>
+                            <option value="tally">Tally Prime & GST (3 Months) - ₹4,000</option>
+                            <option value="web">Web Designing (6 Months) - ₹6,500</option>
+                            <option value="python">Python Programming (3 Months) - ₹5,000</option>
+                            <option value="pgdca">PGDCA (12 Months) - ₹14,000</option>
+                            <option value="hardware">Hardware & Net (6 Months) - ₹5,500</option>
+                            <option value="graphic">AI & Graphic Design (4 Months) - ₹6,000</option>
+                            <option value="fullstack">Full Stack Web (12 Months) - ₹18,500</option>
+                            <option value="cyber">Cyber Security (6 Months) - ₹11,500</option>
+                            <option value="analytics">Data Analytics (4 Months) - ₹7,000</option>
+                            <option value="mobile">Mobile App Dev (6 Months) - ₹12,000</option>
+                            <option value="adit">ADIT Diploma (12 Months) - ₹9,500</option>
+                            <option value="java">Java Core Engine (3 Months) - ₹5,000</option>
+                            <option value="c-cpp">C & C++ Basics (3 Months) - ₹4,000</option>
+                            <option value="dtp">DTP Core (3 Months) - ₹3,500</option>
+                            <option value="video">Video Editing (4 Months) - ₹6,500</option>
+                            <option value="ecommerce">E-Commerce Setup (3 Months) - ₹4,500</option>
+                            <option value="cloud">Cloud Admin (6 Months) - ₹14,500</option>
+                            <option value="linux">Linux Admin (3 Months) - ₹5,500</option>
+                            <option value="devops">DevOps Core (6 Months) - ₹16,000</option>
+                            <option value="database">Database Management (4 Months) - ₹6,000</option>
+                            <option value="ai-foundations">AI Foundations (6 Months) - ₹18,000</option>
+                            <option value="marketing">Digital Marketing (3 Months) - ₹5,000</option>
+                            <option value="adv-accounting">Adv Accounting (4 Months) - ₹5,500</option>
+                            <option value="bcc">BCC Basic (2 Months) - ₹1,500</option>
+                            <option value="typing">Typing Master (2 Months) - ₹1,200</option>
+                            <option value="ui-ux">UI/UX Layouts (4 Months) - ₹7,500</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="qualification">Highest Qualification</label>
+                        <select id="qualification" name="qualification" required>
+                            <option value="" disabled selected>-- Choose qualification --</option>
+                            <option value="below-10">Below Matriculation</option>
+                            <option value="10th">10th Passed</option>
+                            <option value="12th">12th Passed / Intermediate</option>
+                            <option value="graduate">Graduation</option>
+                            <option value="post-graduate">Post Graduation</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="passport-photo">Passport Size Photo</label>
+                        <input type="file" id="passport-photo" name="passport_photo" accept="image/*" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="adhar-photo">Aadhaar Card Photo (Front & Back)</label>
+                        <input type="file" id="adhar-photo" name="adhar_photo" accept="image/*" required>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="address">Correspondence Address</label>
+                        <textarea id="address" name="address" rows="3" placeholder="Enter complete home address" required></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">Submit Registration Request</button>
+            </form>
+        </div>
+
+        <!-- Success Block with Dancing Cartoon -->
+        <div class="success-container" id="success-message">
+            <i class="fa-solid fa-circle-check" style="font-size: 54px; color: var(--success); margin-bottom: 15px;"></i>
+            <h2>Registration Successful!</h2>
+            <p>Aapka registration form safely jama kar liya gaya hai. Hamare desk se jald hi aapse sampark kiya jayega.</p>
+            
+            <!-- Crazy Dancing Character Inside -->
+            <div class="cartoon-wrapper">
+                <div class="cartoon-character">
+                    <div class="cartoon-arm-l"></div>
+                    <div class="cartoon-arm-r"></div>
+                    <div class="cartoon-leg-l"></div>
+                    <div class="cartoon-leg-r"></div>
+                    <div class="cartoon-body"></div>
+                    <div class="cartoon-head">
+                        <div class="cartoon-eye-left"><div class="cartoon-pupil"></div></div>
+                        <div class="cartoon-eye-right"><div class="cartoon-pupil"></div></div>
+                        <div class="cartoon-mouth"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer Element -->
+    <footer>
+        <p>&copy; 2026 Astha Computer Training Center. All Rights Reserved.</p>
+        <p style="margin-top: 5px; font-size: 12px; color: rgba(255,255,255,0.3);">Udharn, Ballia, Uttar Pradesh - ISO 9001:2015 certified IT institution</p>
+    </footer>
+
+    <!-- JavaScript Execution Logic -->
+    <script>
+        function handleRegistration(event) {
+            event.preventDefault(); // Prevents page reload
+            
+            // Hide Form and Show Crazy Cartoon Success Container
+            document.getElementById('form-container').style.display = 'none';
+            const successBox = document.getElementById('success-message');
+            successBox.style.display = 'block';
+            
+            // Smooth scroll down to view character performance clearly
+            successBox.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+</html>
